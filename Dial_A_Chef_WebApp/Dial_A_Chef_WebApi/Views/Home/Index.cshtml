@@ -1,0 +1,467 @@
+﻿
+<!--Modal-->
+<div class="modal fade" id="logModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="border-color:white; background-color:white">
+                <a href="#" class="close" data-dismiss="modal">&times</a>
+                <h4 class="modal-title">Welcome Back</h4>
+               
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                    
+                <form id="LoginForm" method="post" style="width:60%">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-sm-6">
+                            <input type="email" required="required" name="email" id="email" placeholder="Email Address" class="form-control col-sm-offset-6" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="col-sm-6">
+                            <input type="password" required="required" name="password" id="password" placeholder="Password" class="form-control col-sm-offset-6" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="width:60%;border-color:white;background-color:white">
+                <div class="form-group col-md-12">
+                    <div class="col-md-6">
+                        <input type="submit" id="btnLogin" value="Login" onclick="Login()" class="btn btn-primary col-sm-offset-6" />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+        </div>
+        <!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div>
+</div><!-- /.modal -->
+<!--Registration Modal-->
+<div class="modal fade" id="regModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times</button>
+                <h4 class="modal-title">Create An Account</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    
+                    <div class="form-horizontal" style="width:63%">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="text" required="required" name="name" id="name" placeholder="Name" class="form-control col-sm-offset-6" ng-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="text" required="required" name="surname" id="surname" placeholder="Surname" class="form-control col-sm-offset-6" ng-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="email" required="required" name="emailLogin" id="emailLogin" placeholder="Email Address" class="form-control col-sm-offset-6" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="text" required="required" name="contactNo" id="contactNo" placeholder="Phone Number" class="form-control col-sm-offset-6" ng-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="date" required="required" name="dateOfBirth" id="dateOfBirth" placeholder="Date Of Birth (dd/mm/yyyy)" class="form-control col-sm-offset-6" ng-required="true" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="password" required="required" name="passwordLogin" id="passwordLogin" placeholder="Password" class="form-control col-sm-offset-6" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <input type="password" required="required" name="conPassword" id="conPassword" placeholder="Confirm Password" class="form-control col-sm-offset-6" ng-required="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <div class="col-sm-6">
+                                <select name="userType" required="required" id="userType" placeholder="userType" class="form-control col-sm-offset-6" ng-required="true">
+                                    <option>customer account</option>
+                                    <option>chef account</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-6">
+                                <input type="submit" value="Register" class="btn btn-primary col-sm-offset-6" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+<section id="slider" class="slider">
+    <div class="slider_overlay">
+        <div class="container">
+            <div class="row">
+                <div class="main_slider text-center">
+                    <div class="col-md-12">
+                        <div class="main_slider_content wow zoomIn" data-wow-duration="1s">
+                            <h1>Dial A Chef</h1>
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi. </p>
+                            <!--<a href="~/Accounts/Register" class="btn btn-primary">SIGN UP</a>-->
+                            <button type="button" class="btn btn btn-primary" data-toggle="modal" data-target="#regModal">SIGN UP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="abouts" class="abouts">
+    <div class="container">
+        <div class="row">
+            <div class="abouts_content">
+                <div class="col-md-6">
+                    <div class="single_abouts_text text-center wow slideInLeft" data-wow-duration="1s">
+                        <img src="~/images/ab.png" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="single_abouts_text wow slideInRight" data-wow-duration="1s">
+                        <h4>About us</h4>
+                        <h3>WE ARE TASTY</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan</p>
+                        <p>dard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesettingdard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting</p>
+                        <a href="" class="btn btn-primary">click here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="features" class="features">
+    <div class="slider_overlay">
+        <div class="container">
+            <div class="row">
+                <div class="main_features_content_area  wow fadeIn" data-wow-duration="3s">
+                    <div class="col-md-12">
+                        <div class="main_features_content text-left">
+                            <div class="col-md-6">
+                                <div class="single_features_text">
+                                    <h4>Special Recipes</h4>
+                                    <h3>Taste of Precious</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan</p>
+                                    <p>dard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesettingdard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting</p>
+                                    <a href="" class="btn btn-primary">click here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="portfolio_content text-center  wow fadeIn" data-wow-duration="5s">
+                <div class="col-md-12">
+                    <div class="head_title text-center">
+                        <h4>Delightful</h4>
+                        <h3>Experience</h3>
+                    </div>
+                    <div class="main_portfolio_content">
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p1.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="~/Home/Order?id=1" class="btn btn-primary">Click here</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p2.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="~/Home/Order?id=2" class="btn btn-primary">Click here</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p3.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="~/Home/Order?id=3" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p4.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="~/Home/Order?id=4" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p5.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="~/Home/Order?id=5" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p6.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p7.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+                            <img src="~/images/p8.png" alt="" />
+                            <div class="portfolio_images_overlay text-center">
+                                <h6>Italian Source Mushroom</h6>
+                                <p class="product_price">$12</p>
+                                <a href="" class="btn btn-primary">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="ourPakeg" class="ourPakeg">
+    <div class="container">
+        <div class="main_pakeg_content">
+            <div class="row">
+                <div class="head_title text-center">
+                    <h4>Amazing</h4>
+                    <h3>Delicious</h3>
+                </div>
+                <div class="single_pakeg_one text-right wow rotateInDownRight">
+                    <div class="col-md-6 col-md-offset-6 col-sm-8 col-sm-offset-4">
+                        <div class="single_pakeg_text">
+                            <div class="pakeg_title">
+                                <h4>Drinks</h4>
+                            </div>
+                            <ul>
+                                @{
+                                    List<String> meals = (List<String>)ViewData["Meals"];
+                                    foreach (var i in meals)
+                                    {
+                                        <li>@i</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="single_pakeg_two text-left wow rotateInDownLeft">
+                    <div class="col-md-6 col-sm-8">
+                        <div class="single_pakeg_text">
+                            <div class="pakeg_title">
+                                <h4>Main course </h4>
+                            </div>
+                            <ul>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_pakeg_three text-left wow rotateInDownRight">
+                    <div class="col-md-6 col-md-offset-6 col-sm-8 col-sm-offset-4">
+                        <div class="single_pakeg_text">
+                            <div class="pakeg_title">
+                                <h4>Desserts</h4>
+                            </div>
+                            <ul>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                                <li> Tuna Roast Source........................................................$24.5 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="mobaileapps" class="mobailapps">
+    <div class="slider_overlay">
+        <div class="container">
+            <div class="row">
+                <div class="main_mobail_apps_content wow zoomIn">
+                    <div class="col-md-5 col-sm-12 text-center">
+                        <img src="images/iphone.png" alt="" />
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                        <div class="single_monail_apps_text">
+                            <h4> Happy to Announce </h4>
+                            <h1>Mobile App <span>is Available in every OS platform.</span></h1>
+                            <a href=""><img src="images/google.png" alt="" /></a>
+                            <a href=""><img src="images/apps.png" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footer_widget" class="footer_widget">
+    <div class="container">
+        <div class="row">
+            <div class="footer_widget_content text-center">
+                <div class="col-md-4">
+                    <div class="single_widget wow fadeIn" data-wow-duration="2s">
+                        <h3>Take it easy with location</h3>
+                        <div class="single_widget_info">
+                            <p>
+                                112-Legere ancillae vix ne.
+
+                                <span>Te elit putent propriae eum,</span>
+                                <span>aliquip nominati</span>
+                                <span class="phone_email">phone: 00 000 000</span>
+                                <span>Email: support@templatemela.com</span>
+                            </p>
+                        </div>
+                     
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single_widget wow fadeIn" data-wow-duration="4s">
+                        <h3>Take it easy with location</h3>
+                        <div class="single_widget_info">
+                            <p>
+                                <span class="date_day">Monday To Friday</span>
+                                <span>8:00am to 10:00pm(Breakfast)</span>
+                                <span>11:00am to 10:00pm(Lunch/Diner)</span>
+                                <span class="date_day">Saturday & Sunday</span>
+                                <span>10:00am to 11:00pm(Brunch)</span>
+                                <span>11:00am to 12:00pm(Lunch/Dinner)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single_widget wow fadeIn" data-wow-duration="5s">
+                        <h3>Take it easy with location</h3>
+                        <div class="single_widget_form text-left">
+                            <form action="#" id="formid">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="first name" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div> <!-- end of form-group -->
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" rows="3" placeholder="Message"></textarea>
+                                </div>
+                                <input type="submit" value="click here" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+
+        $("btnLogin").click(function () {
+            var frmData = $("LoginForm").serialize();
+
+            $.ajax({
+                dataType: "JSON",
+                type: "POST",
+                url: "http://localhost:13689/api/Web/PostWebLogin",
+                data: frmData,
+                success: function () {
+                    $("logModal").modal("hide");//show for opening modal
+                },
+
+                error: alert("Could Login Failed. Please try again")
+            })
+
+        })
+
+    })
+</script>

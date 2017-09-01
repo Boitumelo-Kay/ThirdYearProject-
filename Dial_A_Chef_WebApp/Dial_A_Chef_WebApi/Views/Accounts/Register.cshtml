@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div style="margin-top:15%"></div>
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="email" name="email" id="email" placeholder="email address" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="password" name="password" id="password" placeholder="password" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="text" name="name" id="name" placeholder="name" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="text" name="surname" id="surname" placeholder="surname" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="date" name="dob" id="dob" placeholder="dob" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="text" name="contact" id="contact" placeholder="contact " class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="text" name="image" id="image" placeholder="image" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-sm-6">
+                    <input type="text" name="utype" id="utype" placeholder="utype" class="form-control col-sm-offset-6" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-6">
+                    <input type="submit" value="Register" class="btn btn-success col-sm-offset-6" />
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-bottom:15%"></div>
+
+}
+</section>
+<div style="margin-bottom:15%"></div>

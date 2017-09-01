@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "UploadMeal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body style="background-image:url('/images/abtbg.jpg');">
+    @using (Html.BeginForm("UploadMeal", "Chef", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container" style="margin:10%;border-radius:4%; width:65%; background-color:white; color:#000000">
+
+            <div class="form-group" style="margin-top:3%">
+                <label><b>Meal Name</b></label>
+                <input type="text" name="mealName" id="mealName" class="form-control" placeholder="Meal Name" />
+            </div>
+
+            <div class="form-group">
+                <label><b>Meal Price</b></label>
+                <input type="text" name="mealPrice" id="mealPrice" class="form-control" placeholder="Price" />
+            </div>
+
+            <div class="form-group">
+                <label><b>Meal Ingredients</b></label>
+                <textarea name="mealIngredients" id="mealIngredients" class="form-control" placeholder="Ingredients"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><b>Meal Description</b></label>
+                <textarea type="text" name="description" id="description" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label><b>Meal Category</b></label>
+                <select name="category" id="category" class="form-control">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Dessert</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><b>Image</b></label>
+                <input type="file" name="file" id="file" class="form-control" />
+            </div>
+
+            <div class="form-group clearfix">
+                <input type="submit" value="Upload" class="btn btn-success">
+            </div>
+        </div>
+    }
+
+
+</body>

@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[OrderPayDetails]
+(
+	[OP_Id] INT IDENTITY(1,1) NOT NULL UNIQUE,
+	[Order_Id] INT NOT NULL UNIQUE,
+	[Total_Points] INT NOT NULL,
+
+	PRIMARY KEY(OP_Id ASC),
+	UNIQUE NONCLUSTERED(OP_Id ASC),
+	FOREIGN KEY(Order_Id) REFERENCES [dbo].[Order] (O_Id)
+)

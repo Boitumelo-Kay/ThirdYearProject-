@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "EditMeal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+
+    <!-- Edit Meal-->
+</head>
+<body style="background-image:url('/images/abtbg.jpg');">
+    <br /><br /><br /><br /><br /><br />
+    <h4><font color="black">Edit Meal Details</font></h4>
+    <hr color:"black" />
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <ul class="nav-pills pull-left">
+                <li><font size="7">@Html.ActionLink("My Dishes", "ChefMeals", "Chef", null, new { @class = "btn btn-primary" })</font></li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="form-group">
+        <div class="col-md-12">
+            <ul class="nav-pills pull-right">
+                <li>@Html.ActionLink("Edit Meal", "GetMeal", "Meal", null, new { @style = "background-color:orangered;color:black;border:medium" ,@class = "btn btn-default btn-sm" })</li>
+                <li>@Html.ActionLink("Upload Meal", "Chef", "Default", null, new { @style = "background-color:orangered;color:black;border:medium", @class = "btn btn-default btn-sm" })</li>
+            </ul>
+        </div>
+    </div>-->
+    @using (Html.BeginForm("EditMeal", "Chef", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    
+            <div class="container" style="margin:10%;border-radius:4%; width:65%; background-color:transparent; color:#000000">
+
+                <div class="form-group" style="margin-top:3%">
+                    <label><font size="+1" ; style="color:black"><b>Meal Name</b></font></label>
+                    <input type="text" id="mName" class="form-control" name="mName" value=@ViewData["Name"] required><br />
+                </div>
+
+                <div class="form-group">
+                    <label><font size="+1" ; style="color:black"><b>Meal Price</b></font></label>
+                    <input type="text" id="mPrice" name="mPrice" class="form-control" value=@ViewData["Price"] required><br />
+                </div>
+
+                <div class="form-group">
+                    <label><font size="+1" ; style="color:black"><b>Meal Ingredients</b></font></label>
+                    <textarea id="mIngred" name="mIngred" class="form-control" required>@ViewData["Ingredients"]</textarea><br />
+                </div>
+
+                <div class="form-group">
+                    <label><font size="+1" ; style="color:black"><b>Meal Description</b></font></label>
+                    <textarea id="mDesc" name="mDesc" class="form-control" required>@ViewData["Description"]</textarea><br /><br />
+                </div>
+
+                <div class="form-group">
+                    <label><b>Meal Category</b></label>
+                    <select name="category" id="category" class="form-control">
+                        <option>Breakfast</option>
+                        <option>Lunch</option>
+                        <option>Dinner</option>
+                        <option>Dessert</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><font size="+1" ; style="color:black"><b>Meal Image</b></font></label>
+                    <input type="file" name="file"   id="file" style="color:white" class="form-control" />
+                </div>
+
+                <div class="form-group pull-right">
+                    <div class="col-md-6">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    }
+    <div style="margin-bottom:8%">
+    </div>
+</body>
+</html>
+
+

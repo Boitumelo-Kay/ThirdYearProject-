@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "AddMeal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+
+    <!--Upload Meal-->
+</head>
+<body style="background-image:url('/images/abtbg.jpg'); color: white">
+    <br /><br /><br /><br /><br /><br />
+    <h4><font color="black">Upload Meal</font></h4>
+    <hr />
+
+    <!--
+    <div class="form-group">
+            <div class="col-md-12">
+                <ul class="nav-pills pull-right">
+                    <li><font size="7">@Html.ActionLink("Back To Your Dishes", "ChefMeals", "Chef", null, new { @class = "btn btn-primary" })</font></li>
+                </ul>
+            </div>
+        </div>
+    -->
+
+    @using (Html.BeginForm("AddMeal", "Chef", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="container" style="margin:10%;border-radius:4%; width:65%; background-color:transparent; color:#000000">
+
+            <div class="form-group" style="margin-top:3%">
+                <label><font size="+1" ; style="color:black"><b>Meal Name</b></font></label>
+                <input type="text" id="mName" class="form-control" name="mName" required><br />
+            </div>
+
+            <div class="form-group">
+                <label><font size="+1" ; style="color:black"><b>Meal Price</b></font></label>
+                <input type="text" id="mPrice" class="form-control" name="mPrice" required><br />
+            </div>
+
+            <div class="form-group">
+                <label><font size="+1" ; style="color:black"><b>Meal Ingredients</b></font></label>
+                <textarea id="mIngred" name="mIngred" class="form-control" required></textarea><br />
+            </div>
+
+            <div class="form-group">
+                <label><font size="+1" ; style="color:black"><b>Meal Description</b></font></label>
+                <textarea id="mDesc" name="mDesc" class="form-control" required></textarea><br /><br />
+            </div>
+
+            <div class="form-group">
+                <label><b>Meal Category</b></label>
+                <select name="category" id="category" class="form-control">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Dessert</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label><font size="+1" ; style="color:black"><b>Meal Image</b></font></label>
+                <input type="file" name="file"  id="file" />
+            </div>
+
+            <div class="form-group">
+                <div class="pull-right">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <ul class="nav-pills pull-left">
+                        <li><font size="7">@Html.ActionLink("Back To Your Dishes", "ChefMeals", "Chef", null, new { @class = "btn btn-link" })</font></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    <div style="margin-bottom:8%">
+    </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "GetMeal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<body style="background-image:url('/images/abtbg.jpg')">
+    <br /><br /><br /><br /><br /><br />
+
+    <!--Table Style-->
+    <style>
+        table {
+            background: #f5f5f5;
+            box-shadow: inset 0 1px 0 #fff;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: gray;
+            border-left: 1.5px solid black;
+            border-right: 1.5px solid black;
+            border-top: 1.5px solid black;
+            border-bottom: 1.5px solid black;
+            box-shadow: inset 0 1px 0 #999;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 15px;
+            position: relative;
+            text-shadow: 0 1px 0 #000;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+
+    <h4><font color="black">Your Dishes</font></h4>
+
+    <hr color="black" />
+
+    <!--Pull list of all chefs dishes from database-->
+
+    <table style="margin-bottom:6%">
+
+        <tr>
+            <th>Meal Name</th>
+            <th>Ingridients</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+
+        @{
+
+
+            List<string> ingridients = (List<string>)ViewData["Ingredients"];
+            List<string> meals = (List<String>)ViewData["Meals"];
+            List<string> description = (List<String>)ViewData["Description"];
+            List<int> price = (List<int>)ViewData["Price"];
+            for (int i = 0; i < meals.Count; i++)
+            {
+                <tbody>
+                    <tr>
+                        <td><strong>@meals[i]</strong></td>
+                        <td>@ingridients[i]</td>
+                        <td>@description[i]</td>
+                        <td>@price[i]</td>
+                        <td><i class="fa fa-pencil" data-toggle="modal" data-target="#editModal"></i></td>
+                        <!--<td><button type="button" class="btn btn btn-primary" data-toggle="modal" data-target="#editModal">Edit Meal</button></td>-->
+                        <td><i class="fa fa-trash"></i></td>
+
+                        <!--<td>@Html.ActionLink("Edit Meal", "EditMeal", "Chef", new { name = @meals[i] }, new { @class = "btn btn-link" })</td>-->
+                        <!--<td>@Html.ActionLink("Delete Meal", "DeleteMeal", "Chef", new { name = @meals[i] }, new { @class = "btn btn-link" })</td>-->
+                    </tr>
+                </tbody>
+            }
+        }
+    </table>
+
+
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <!--<ul class="nav-pills pull-left">-->
+            <button type="button" class="btn btn btn-primary" data-toggle="modal" data-target="#upModal">Upload Meal</button>
+            <!-- <li><font size="7">@Html.ActionLink("Upload Meal", "AddMeal", "Chef", null, new { @class = "btn btn-primary" })</font></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+
+
+    <div style="margin-bottom:8%">
+    </div>
+
+    <!--Upload Modal-->
+    <div class="modal fade" id="upModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times</button>
+                    <h4 class="modal-title">Upload Meal</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="form-horizontal" style="width:63%">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Name</b></label>
+                                    <input type="text" required="required" name="mealName" id="mealName" placeholder="Meal Name" class="form-control col-sm-offset-6" ng-required="true" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Price</b></label>
+                                    <input type="text" required="required" name="mealPrice" id="mealPrice" placeholder="Price" class="form-control col-sm-offset-6" ng-required="true" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Ingredients</b></label>
+                                    <input type="text" required="required" name="MealIng" id="MealIng" placeholder="Meal Ingredients" class="form-control col-sm-offset-6" ng-required="true" />
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Description</b></label>
+                                    <input type="text" required="required" name="MealDesc" id="MealDesc" placeholder="Meal Description" class="form-control col-sm-offset-6" ng-required="true" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Category</b></label>
+                                    <select name="category" id="category" class="form-control col-sm-offset-6" ng-required="true">
+                                        <option>Breakfast</option>
+                                        <option>Lunch</option>
+                                        <option>Dinner</option>
+                                        <option>Dessert</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Image</b></label>
+                                    <input type="file" name="file" id="file" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <input type="submit" value="Save" class="btn btn-primary">
+                            </div>
+
+                        </div>
+
+
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--Edit Modal-->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times</button>
+                    <h4 class="modal-title">Edit Meal</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <div class="form-horizontal" style="width:63%">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Name</b></label>
+                                    <input type="text" name="mealName" id="mealName" placeholder="Meal Name" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Price</b></label>
+                                    <input type="text" name="mealPrice" id="mealPrice" placeholder="Price" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Ingredients</b></label>
+                                    <input type="text" name="MealIng" id="MealIng" placeholder="Meal Ingredients" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Description</b></label>
+                                    <input type="text" name="MealDesc" id="MealDesc" placeholder="Meal Description" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Meal Category</b></label>
+                                    <select name="category" id="category" class="form-control col-sm-offset-6">
+                                        <option>Breakfast</option>
+                                        <option>Lunch</option>
+                                        <option>Dinner</option>
+                                        <option>Dessert</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <div class="col-sm-6">
+                                    <label><b>Image</b></label>
+                                    <input type="file" name="file" id="file" class="form-control col-sm-offset-6" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <input type="submit" value="Save" class="btn btn-primary">
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+</body>
+</html>

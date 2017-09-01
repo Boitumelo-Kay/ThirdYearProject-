@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UntitledBytesDB" Class="ubDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\UntitledBytesDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="UntitledBytesDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="U_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="U_Name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_Surname" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_Password" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_DOB" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="U_ContactNo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_Image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="U_Type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Account_Chef" Member="Chef" ThisKey="U_ID" OtherKey="Ch_ID" Type="Chef" Cardinality="One" />
+      <Association Name="Account_Customer" Member="Customer" ThisKey="U_ID" OtherKey="Cu_ID" Type="Customer" Cardinality="One" />
+      <Association Name="Account_MessageHistory" Member="MessageHistories" ThisKey="U_ID" OtherKey="U_ID" Type="MessageHistory" />
+      <Association Name="Account_BlockedAccount" Member="BlockedAccounts" ThisKey="U_ID" OtherKey="B_UId" Type="BlockedAccount" />
+      <Association Name="Account_Administrator" Member="Administrator" ThisKey="U_ID" OtherKey="Admin_ID" Type="Administrator" Cardinality="One" />
+      <Association Name="Account_CookingSession" Member="CookingSessions" ThisKey="U_ID" OtherKey="Cust_Id" Type="CookingSession" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Chefs" Member="Chefs">
+    <Type Name="Chef">
+      <Column Name="Ch_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ch_Type" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Ch_Rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ch_Bio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Chef_Dish" Member="Dishes" ThisKey="Ch_ID" OtherKey="CHEF_Id" Type="Dish" />
+      <Association Name="Chef_Order" Member="Orders" ThisKey="Ch_ID" OtherKey="Chef_ID" Type="Order" />
+      <Association Name="Account_Chef" Member="Account" ThisKey="Ch_ID" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="Cu_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cu_DietaryR" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Cu_Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Order" Member="Orders" ThisKey="Cu_ID" OtherKey="Cust_ID" Type="Order" />
+      <Association Name="Account_Customer" Member="Account" ThisKey="Cu_ID" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Message" Member="Messages">
+    <Type Name="Message">
+      <Column Name="Msg_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Msg_Content" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Sent_Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Msg_To" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Msg_From" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Message_MessageHistory" Member="MessageHistories" ThisKey="Msg_ID" OtherKey="Msg_ID" Type="MessageHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MessageHistory" Member="MessageHistories">
+    <Type Name="MessageHistory">
+      <Column Name="MsgH_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Msg_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="U_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Message_MessageHistory" Member="Message" ThisKey="Msg_ID" OtherKey="Msg_ID" Type="Message" IsForeignKey="true" />
+      <Association Name="Account_MessageHistory" Member="Account" ThisKey="U_ID" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BlockedAccount" Member="BlockedAccounts">
+    <Type Name="BlockedAccount">
+      <Column Name="B_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="B_Email" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="B_DateBlocked" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="B_DateUnblocked" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="B_Reason" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="B_IsBlocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="B_UId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Account_BlockedAccount" Member="Account" ThisKey="B_UId" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dish" Member="Dishes">
+    <Type Name="Dish">
+      <Column Name="M_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="M_MealImage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="M_Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="M_Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="M_Ingridients" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="M_Description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CAT_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CHEF_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Dish_DishCatBridge" Member="DishCatBridges" ThisKey="M_Id" OtherKey="M_ID" Type="DishCatBridge" />
+      <Association Name="Dish_DishOrderBridge" Member="DishOrderBridges" ThisKey="M_Id" OtherKey="Dish_Id" Type="DishOrderBridge" />
+      <Association Name="Dish_Order" Member="Orders" ThisKey="M_Id" OtherKey="Dish_ID" Type="Order" />
+      <Association Name="Chef_Dish" Member="Chef" ThisKey="CHEF_Id" OtherKey="Ch_ID" Type="Chef" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DishCatBridge" Member="DishCatBridges">
+    <Type Name="DishCatBridge">
+      <Column Name="DC_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="M_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cat_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Dish_DishCatBridge" Member="Dish" ThisKey="M_ID" OtherKey="M_Id" Type="Dish" IsForeignKey="true" />
+      <Association Name="MealCategory_DishCatBridge" Member="MealCategory" ThisKey="Cat_ID" OtherKey="Cat_ID" Type="MealCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Administrator" Member="Administrators">
+    <Type Name="Administrator">
+      <Column Name="Admin_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Contract_Start" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Contract_End" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Account_Administrator" Member="Account" ThisKey="Admin_ID" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MealCategory" Member="MealCategories">
+    <Type Name="MealCategory">
+      <Column Name="Cat_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cat_Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="MealCategory_DishCatBridge" Member="DishCatBridges" ThisKey="Cat_ID" OtherKey="Cat_ID" Type="DishCatBridge" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DishOrderBridge" Member="DishOrderBridges">
+    <Type Name="DishOrderBridge">
+      <Column Name="DO_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Dish_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Dish_DishOrderBridge" Member="Dish" ThisKey="Dish_Id" OtherKey="M_Id" Type="Dish" IsForeignKey="true" />
+      <Association Name="Order_DishOrderBridge" Member="Order" ThisKey="Order_Id" OtherKey="O_Id" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderPayDetails" Member="OrderPayDetails">
+    <Type Name="OrderPayDetail">
+      <Column Name="OP_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Order_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Total_Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Order_OrderPayDetail" Member="Order" ThisKey="Order_Id" OtherKey="O_Id" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CookingSession" Member="CookingSessions">
+    <Type Name="CookingSession">
+      <Column Name="CS_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SessionStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SessionEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SessionDuration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cust_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Account_CookingSession" Member="Account" ThisKey="Cust_Id" OtherKey="U_ID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="O_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="O_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Dish_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cust_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Prep_Method" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Chef_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Delivery_Method" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="IsAccepted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ReasonRejected" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SeenByChef" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Processed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Order_DishOrderBridge" Member="DishOrderBridges" ThisKey="O_Id" OtherKey="Order_Id" Type="DishOrderBridge" />
+      <Association Name="Order_OrderPayDetail" Member="OrderPayDetails" ThisKey="O_Id" OtherKey="Order_Id" Type="OrderPayDetail" />
+      <Association Name="Order_Delivery" Member="Deliveries" ThisKey="O_Id" OtherKey="Order_Id" Type="Delivery" />
+      <Association Name="Chef_Order" Member="Chef" ThisKey="Chef_ID" OtherKey="Ch_ID" Type="Chef" IsForeignKey="true" />
+      <Association Name="Customer_Order" Member="Customer" ThisKey="Cust_ID" OtherKey="Cu_ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Dish_Order" Member="Dish" ThisKey="Dish_ID" OtherKey="M_Id" Type="Dish" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Delivery" Member="Deliveries">
+    <Type Name="Delivery">
+      <Column Name="Del_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Del_Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Del_Time" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Del_ExpectedTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Order_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Order_Delivery" Member="Order" ThisKey="Order_Id" OtherKey="O_Id" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "ChefProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body style="background-image:url('/images/abtbg.jpg');">
+    <br /><br /><br /><br /><br /><br />
+    <h4><font color="black">Chef Profile</font></h4>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-12">
+            <ul class="nav-pills pull-right">
+                <li><font size="7">@Html.ActionLink("My Dishes", "ChefMeals", "Chef", null, new { @class = "btn btn-primary" })</font></li>
+            </ul>
+        </div>
+    </div>
+
+    <p><font size="+1" color="black"><u>Rating</u></font></p> <!--Shows the Chefs average rating-->
+
+    <p><font size="+1" color="black"><u>Orders Received</u></font></p>
+    <!-- pull list of orders recieved from database -->
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <ul class="nav-pills pull-left">
+                <li><font size="7">@Html.ActionLink("Edit Chef Profile", "ChefMeals", "Chef", null, new { @class = "btn btn-primary" })</font></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="margin-bottom:8%">
+    </div>
+</body>
+
+
+
+
